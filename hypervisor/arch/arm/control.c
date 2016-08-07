@@ -378,6 +378,12 @@ void arch_flush_cell_vcpu_caches(struct cell *cell)
 
 void arch_config_commit(struct cell *cell_added_removed)
 {
+	/*
+	 * We only need to flush caches for non-root cells and can ignore this
+	 * call when being invoked during setup on the root cell.
+	 */
+	if (cell_added_removed && cell_added_removed != &root_cell)
+		arm_cell_dcaches_flush(cell_added_removed, DCACHE_INVALIDATE);
 }
 
 void __attribute__((noreturn)) arch_panic_stop(void)
