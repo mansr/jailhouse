@@ -28,6 +28,7 @@
 #include <asm/apic.h>
 
 #define VIRTIO_VENDOR_ID	0x1af4
+#define SIEMENS_VENDOR_ID	0x110a
 #define IVSHMEM_DEVICE_ID	0x1110
 
 /* in jailhouse we can not allow dynamic remapping of the actual shared memory
@@ -68,7 +69,7 @@ static const u32 default_cspace[IVSHMEM_CFG_SIZE / sizeof(u32)] = {
 	[0x00/4] = (IVSHMEM_DEVICE_ID << 16) | VIRTIO_VENDOR_ID,
 	[0x04/4] = (PCI_STS_CAPS << 16),
 	[0x08/4] = PCI_DEV_CLASS_MEM << 24,
-	[0x2c/4] = (IVSHMEM_DEVICE_ID << 16) | VIRTIO_VENDOR_ID,
+	[0x2c/4] = (IVSHMEM_DEVICE_ID << 16) | SIEMENS_VENDOR_ID,
 	[0x34/4] = IVSHMEM_CFG_MSIX_CAP,
 	/* MSI-X capability */
 	[IVSHMEM_CFG_MSIX_CAP/4] = (IVSHMEM_MSIX_VECTORS - 1) << 16
